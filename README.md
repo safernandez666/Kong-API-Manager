@@ -1,6 +1,6 @@
 # API Manager Stack 
 
-Run Kong Server + Konga + Prometheus + API & DDBB + Splunk
+Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Splunk
 
 Clone the proyect and run docker-compose up
 
@@ -75,6 +75,46 @@ Add plug-in and send logs to Splunk
 
 <p align="center">
 <img src="screenshots/Kong_3.png" width="800" >
+</p>
+
+Let's add some security. For this, a Customer is necessary, add an Authentication method and then associate it with the route.
+
+Create mi Customer: santiago
+
+<p align="center">
+<img src="screenshots/CreateCustomer.png" width="400" >
+</p>
+
+Generate my API KEY
+
+<p align="center">
+<img src="screenshots/GenerateAPIKEY.png" width="400" >
+</p>
+
+My API KEY
+
+<p align="center">
+<img src="screenshots/APIKEY.png" width="400" >
+</p>
+
+On the route, add the use of the API Key
+
+<p align="center">
+<img src="screenshots/AddAPIKEYRoute.png" width="800" >
+</p>
+
+<p align="center">
+<img src="screenshots/AddAPIKEYRoute_2.png" width="400" >
+</p>
+
+Try with Postman or Command Line
+
+curl -X GET \
+  'http://localhost:8000' \
+  -H 'apikey: fwASbEngZ4zB609S7WASDt0X64R5sdkV'
+
+<p align="center">
+<img src="screenshots/Postman.png" width="800" >
 </p>
 
 ### Splunk 

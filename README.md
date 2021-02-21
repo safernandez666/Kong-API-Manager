@@ -1,4 +1,6 @@
-# SOCLess
+# API Manager Stack 
+
+Run Kong Server + Konga + Prometheus + API & DDBB + Splunk
 
 Clone the proyect and run docker-compose up
 

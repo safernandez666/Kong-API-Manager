@@ -97,7 +97,7 @@ My API KEY
 <img src="screenshots/APIKEY.png" width="400" >
 </p>
 
-On the route, add the use of the API Key
+On the route, add the use of the API Key.
 
 <p align="center">
 <img src="screenshots/AddAPIKEYRoute.png" width="800" >
@@ -107,7 +107,7 @@ On the route, add the use of the API Key
 <img src="screenshots/AddAPIKEYRoute_2.png" width="400" >
 </p>
 
-Try with Postman or Command Line
+Try with Postman or Command Line.
 
 curl -X GET \
   'http://localhost:8000' \
@@ -121,9 +121,7 @@ curl -X GET \
 
 Enter on [http://localhost:8888](http://localhost:8888) with Username: admin and Password: password
 
-Create the Data Input on port 1514 to receive the Kong's logs.
-
-I create a panel, to visualize some data. You can create yours.
+Create the Data Input on port 1514 to receive the Kong's logs. I create a panel, to visualize some data. You can create yours.
 
 <p align="center">
 <img src="screenshots/SplunkDashboard.png" width="800" >
@@ -131,17 +129,13 @@ I create a panel, to visualize some data. You can create yours.
 
 ### Prometheus + Grafana
 
-Prometheus to store the data and Grafana to visualize it.
-
-Add the plugin.
+Prometheus to store the data and Grafana to visualize it. Add the plugin.
 
 <p align="center">
 <img src="screenshots/Plugin.png" width="600" >
 </p>
 
-Ingress on Grafana on [http://localhost:3000](http://localhost:3000) with Username: admin and Password: admin
-
-Import data from prometheus. The docker is prometheus on port 9090.
+Ingress on Grafana on [http://localhost:3000](http://localhost:3000) with Username: admin and Password: admin. Import data from prometheus. The docker is prometheus on port 9090.
 
 <p align="center">
 <img src="screenshots/Prometheus_1.png" width="600" >

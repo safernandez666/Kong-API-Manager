@@ -1,0 +1,165 @@
+version: '3'
+
+services:
+
+  api:
+    build: api/.
+    container_name: api
+    environment:
+      DATABASE: "db"
+    links:
+      - db
+    restart: always
+    ports:
+      - "5000:5000"
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: maradona
+      MYSQL_USER: maradona
+      MYSQL_PASSWORD:
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db/maradona.sql:/docker-entrypoint-initdb.d/init.sql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+  kong-database:
+    image: postgres:12-alpine
+    container_name: kong-database
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+      - POSTGRES_PASSWORD=kong
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  migrations:
+    depends_on:
+      - kong-database
+    image: kong
+    container_name: kong-migrations
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_DATABASE=kong
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=kong
+    command: kong migrations bootstrap -v
+
+  kong:
+    depends_on:
+      - kong-database
+    image: kong
+    ports:
+      - 8000:8000
+      - 443:8443 
+      - 8001:8001
+    container_name: kong
+    restart: always
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_DATABASE=kong
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=kong
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001
+      - KONG_PROXY_LISTEN=0.0.0.0:8000, 0.0.0.0:8443 ssl http2
+      - KONG_NGINX_HTTP_RESOLVER=8.8.8.8
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_TRUSTED_IPS=0.0.0.0/0,::/0
+      - KONG_REAL_IP_RECURSIVE=on
+    healthcheck:
+      test: ["CMD", "wget", "-O-", "http://127.0.0.1:8001/status"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+
+  mongo:
+    image: mongo:4.2.2-bionic
+    ports: 
+      - 27017:27017
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017/konga --quiet
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - konga_data:/data/db
+
+  konga:
+    image: pantsel/konga:latest
+    ports:
+      - 1337:1337
+    environment:
+      DB_ADAPTER: mongo
+      DB_DATABASE: konga
+      DB_HOST: mongo
+      KONGA_SEED_USER_DATA_SOURCE_FILE: /kus.js
+      NODE_ENV: production
+    volumes:
+      - ./kus.js:/kus.js:ro
+    restart: on-failure
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 127.0.0.1:9090:9090
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: always
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - 9100:9100
+    container_name: node_exporter
+    restart: always
+    depends_on:
+      - prometheus
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    container_name: grafana
+    restart: always
+    links: 
+      - prometheus:prometheus
+    environment:
+      GF_INSTALL_PLUGINS: grafana-clock-panel, grafana-simple-json-datasource
+    depends_on:
+      - prometheus
+
+  splunk:
+    environment:
+      - TZ=America/Buenos_Aires
+      - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_START_ARGS=--accept-license --no-prompt --answer-yes
+      - SPLUNK_PASSWORD=password
+    hostname: splunk
+    image: splunk/splunk:latest
+    ports:
+      - "8888:8000"
+      - "8088:8088"
+      - "9997:9997"
+      - "1514:1514"
+    restart: always
+
+volumes:
+  konga_data:
+  dbdata:

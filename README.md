@@ -96,7 +96,7 @@ Prometheus to store the data and Grafana to visualize it.
 Add the plugin.
 
 <p align="center">
-<img src="screenshots/Plugin.png" width="800" >
+<img src="screenshots/Plugin.png" width="600" >
 </p>
 
 Ingress on Grafana on [http://localhost:3000](http://localhost:3000) with Username: admin and Password: admin
@@ -104,19 +104,19 @@ Ingress on Grafana on [http://localhost:3000](http://localhost:3000) with Userna
 Import data from prometheus. The docker is prometheus on port 9090.
 
 <p align="center">
-<img src="screenshots/Prometheus_1.png" width="800" >
+<img src="screenshots/Prometheus_1.png" width="600" >
 </p>
 
 Import the Dashboard.
 
 <p align="center">
-<img src="screenshots/Prometheus_2.png" width="800" >
+<img src="screenshots/Prometheus_2.png" width="600" >
 </p>
 
 Load the JSON.
 
 <p align="center">
-<img src="screenshots/Prometheus_3.png" width="800" >
+<img src="screenshots/Prometheus_3.png" width="300" >
 </p>
 
 Enjoy the metrics.

@@ -110,7 +110,7 @@ Import data from prometheus. The docker is prometheus on port 9090.
 Import the Dashboard.
 
 <p align="center">
-<img src="screenshots/Prometheus_2.png" width="600" >
+<img src="screenshots/Prometheus_2.png" width="300" >
 </p>
 
 Load the JSON.

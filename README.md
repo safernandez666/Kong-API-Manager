@@ -59,7 +59,7 @@ I create the Username and Password on kus.js. It's important change the Password
 Create the connection
 
 <p align="center">
-<img src="screenshots/Kong_Config.png" width="600" >
+<img src="screenshots/Kong_Config.png" width="400" >
 </p>
 
 

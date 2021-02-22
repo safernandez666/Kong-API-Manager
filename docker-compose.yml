@@ -165,6 +165,7 @@ services:
 
 volumes:
   konga_data:
+  pg_data:
   dbdata:
   splunk_etc:
   splunk_var:

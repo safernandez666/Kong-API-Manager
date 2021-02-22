@@ -5,8 +5,10 @@ Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Splunk
 Clone the proyect and run docker-compose up
 
 ```bash
-git clone https://github.com/safernandez666/SOCLess.git && cd SOCLess
+https://github.com/safernandez666/Kong-API-Manager.git && cd Kong-API-Manager
+
 chmod +x kong-start.sh
+
 sh kong-start.sh
 ```
 # Running the stack

@@ -2,6 +2,8 @@
 
 echo "Starting kong-database..."
 
+#docker volume rm $(docker volume ls -q)
+
 docker-compose up -d kong-database
 
 STATUS="starting"

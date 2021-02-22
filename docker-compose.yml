@@ -36,7 +36,7 @@ services:
       - POSTGRES_DB=kong
       - POSTGRES_PASSWORD=kong
     volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -68,6 +68,7 @@ services:
     container_name: kong
     restart: always
     environment:
+      - TZ=America/Buenos_Aires
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
       - KONG_PG_DATABASE=kong
@@ -115,7 +116,7 @@ services:
   prometheus:
     image: prom/prometheus
     ports:
-      - 127.0.0.1:9090:9090
+      - 9090:9090
     container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml

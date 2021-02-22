@@ -159,7 +159,12 @@ services:
       - "9997:9997"
       - "1514:1514"
     restart: always
+    volumes:
+      - splunk_var:/opt/splunk/var
+      - splunk_etc:/opt/splunk/etc
 
 volumes:
   konga_data:
   dbdata:
+  splunk_etc:
+  splunk_var:

@@ -125,6 +125,8 @@ Enter on [http://localhost:8888](http://localhost:8888) with Username: admin and
 
 Create the Data Input on port 1514 to receive the Kong's logs. I create a panel, to visualize some data. You can create yours.
 
+In the proyecto you have the dashboard to import.
+
 <p align="center">
 <img src="screenshots/SplunkDashboard.png" width="800" >
 </p>

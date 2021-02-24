@@ -131,6 +131,10 @@ In the proyecto you have the dashboard to import.
 <img src="screenshots/SplunkDashboard.png" width="800" >
 </p>
 
+You can post the Plugin on Kong with:
+
+curl -X POST http://localhost:8001/services/MyAPI/plugins --data "name=tcp-log" --data "config.host=NAMECONTAINERSPLUNK" --data "config.port=1514"
+
 ### Prometheus + Grafana
 
 Prometheus to store the data and Grafana to visualize it. Add the plugin.

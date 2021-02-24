@@ -33,24 +33,32 @@ Check the name of the containers for future configurations.
 
 ### Create Service on Kong
 
+```bash
 curl -i -X POST \
 --url http://localhost:8001/services/ \
 --data 'name=MyAPI' \
 --data 'url=http://api:5000'
+```
 
 Test
 
+```bash
 curl -i http://localhost:8001/services/MyAPI
+```
 
 ### Create Route on the Service
 
+```bash
 curl -i -X POST http://localhost:8001/services/MyAPI/routes \
   --data 'paths[]=/' \
   --data name=main
+```
 
 Test
 
+```bash
 curl -i -X GET http://localhost:8000/request
+```
 
 ### Konga GUI 
 
@@ -111,9 +119,11 @@ On the route, add the use of the API Key.
 
 Try with Postman or Command Line.
 
+```bash
 curl -X GET \
   'http://localhost:8000' \
   -H 'apikey: fwASbEngZ4zB609S7WASDt0X64R5sdkV'
+```
 
 <p align="center">
 <img src="screenshots/Postman.png" width="800" >
@@ -133,7 +143,9 @@ In the proyecto you have the dashboard to import.
 
 You can post the Plugin on Kong with:
 
+```bash
 curl -X POST http://localhost:8001/services/MyAPI/plugins --data "name=tcp-log" --data "config.host=NAMECONTAINERSPLUNK" --data "config.port=1514"
+```
 
 ### Prometheus + Grafana
 

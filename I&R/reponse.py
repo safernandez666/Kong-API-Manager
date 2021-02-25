@@ -31,14 +31,15 @@ def bloqueo():
             'config.deny':args.ip}
     r = requests.post(url, data)
     data = r.json()
-    id = data['id']
-    print ('Bloqueado: %s' % args.ip)
-    return id
+    print ('Bloqueado: %s' % data['config']['deny'])
+    return data
 
-def eliminar(id):
-    print('El ID del Plugin es: %s' % id)
-    r = requests.delete(url + '/' + id)
-    print ('Desbloqueo: %s' % args.ip)
+def eliminar(data):
+    id_plug = data['id']
+    print('El ID del Plugin es: %s' % id_plug)
+    print ('Desbloqueo: %s' % data['config']['deny'])
+    r = requests.delete(url + '/' + id_plug)
+
 
 
 

@@ -1,6 +1,18 @@
 import time 
 import json
 import requests
+import argparse
+
+
+parser = argparse.ArgumentParser(
+    description='Programa IR IP Restrinction'
+)
+
+parser.add_argument('-i', '--ip', metavar='ip', required=True, help='Direccion IP a Bloquear. Ej: python3 response.py 192.168.0.111')
+parser.add_argument('-t', '--time', metavar='time', required=True, help='Tiempo a mantener la Direccion IP a Bloquear. Ej: python3 response.py 192.168.0.111')
+
+
+args = parser.parse_args()
 url = 'http://api.local:8001/services/MyAPI/plugins'
 
   
@@ -16,24 +28,23 @@ def countdown(t):
 
 def bloqueo():
     data = {'name':'ip-restriction',
-            'config.deny':"192.168.0.118"}
+            'config.deny':args.ip}
     r = requests.post(url, data)
     data = r.json()
     id = data['id']
-    print ('Bloqueado')
+    print ('Bloqueado: %s' % args.ip)
     return id
 
 def eliminar(id):
-    print('El ID es: %s' % id)
+    print('El ID del Plugin es: %s' % id)
     r = requests.delete(url + '/' + id)
-    print ('Desbloqueado')
+    print ('Desbloqueo: %s' % args.ip)
 
-# Tiempo Bloqueado
-t = 10
+
 
 # Comienzo
 id = bloqueo()
 # Timer
-countdown(t)
+countdown(int(args.time))
 # Eliminar
 eliminar(id)

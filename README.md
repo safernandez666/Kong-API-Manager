@@ -5,8 +5,10 @@ Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Splunk
 Clone the proyect and run docker-compose up
 
 ```bash
-git clone https://github.com/safernandez666/SOCLess.git && cd SOCLess
+https://github.com/safernandez666/Kong-API-Manager.git && cd Kong-API-Manager
+
 chmod +x kong-start.sh
+
 sh kong-start.sh
 ```
 # Running the stack
@@ -123,9 +125,15 @@ Enter on [http://localhost:8888](http://localhost:8888) with Username: admin and
 
 Create the Data Input on port 1514 to receive the Kong's logs. I create a panel, to visualize some data. You can create yours.
 
+In the proyecto you have the dashboard to import.
+
 <p align="center">
 <img src="screenshots/SplunkDashboard.png" width="800" >
 </p>
+
+You can post the Plugin on Kong with:
+
+curl -X POST http://localhost:8001/services/MyAPI/plugins --data "name=tcp-log" --data "config.host=NAMECONTAINERSPLUNK" --data "config.port=1514"
 
 ### Prometheus + Grafana
 

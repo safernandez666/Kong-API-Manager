@@ -39,7 +39,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U kong"]
       interval: 30s
       timeout: 10s
       retries: 5

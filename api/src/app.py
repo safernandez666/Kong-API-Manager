@@ -34,7 +34,10 @@ def get_one(id):
     cur.execute('''select * from maradona.frases where id = %d''' % id)
     r = [dict((cur.description[i][0], value)
                 for i, value in enumerate(row)) for row in cur.fetchall()]
-    return jsonify({'frases' : r})
+    if r:
+        return jsonify({'frases' : r})
+    else:
+        return jsonify({'frases' : r}), 404
 
 @app.route('/cantidad')
 def get_last():

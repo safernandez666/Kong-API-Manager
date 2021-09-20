@@ -38,13 +38,13 @@ docker-compose up -d konga
 
 echo "Konga running http://0.0.0.0:1337/"
 
-#docker-compose up -d grafana
+docker-compose up -d grafana
 
-#echo "Grafana running http://0.0.0.0:3000/"
+echo "Grafana running http://0.0.0.0:3000/"
 
-#echo "Starting prometheus..."
+echo "Starting prometheus..."
 
-#docker-compose up -d prometheus node_exporter
+docker-compose up -d prometheus node_exporter
 
 echo "Prometheus running http://0.0.0.0:9090/"
 

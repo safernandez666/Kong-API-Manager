@@ -1,6 +1,6 @@
 # API Manager Stack 
 
-Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Splunk
+Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Graylog
 
 Clone the proyect and run docker-compose up
 
@@ -121,7 +121,7 @@ curl -X GET \
 
 ### Graylog 
 
-Enter on [http://localhost:9000](http://localhost:9000) with Username: admin and Password: password
+Enter on [http://localhost:9000](http://localhost:9000) with Username: admin and Password: admin
 
 Create the Data Input on port 1514 to receive the Kong's logs. I create a panel, to visualize some data. You can create yours.
 

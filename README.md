@@ -5,7 +5,7 @@ Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Splunk
 Clone the proyect and run docker-compose up
 
 ```bash
-https://github.com/safernandez666/Kong-API-Manager-Graylog.git && cd Kong-API-Manager-Graylog
+https://github.com/safernandez666/Kong-API-Manager.git && cd Kong-API-Manager
 
 chmod +x kong-start.sh
 
@@ -119,9 +119,9 @@ curl -X GET \
 <img src="screenshots/Postman.png" width="800" >
 </p>
 
-### Splunk 
+### Graylog 
 
-Enter on [http://localhost:8888](http://localhost:8888) with Username: admin and Password: password
+Enter on [http://localhost:9000](http://localhost:9000) with Username: admin and Password: password
 
 Create the Data Input on port 1514 to receive the Kong's logs. I create a panel, to visualize some data. You can create yours.
 

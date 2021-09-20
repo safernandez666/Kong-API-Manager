@@ -166,3 +166,18 @@ Enjoy the metrics.
 <p align="center">
 <img src="screenshots/PrometheusDashboard.png" width="800" >
 </p>
+
+### Incident & Response
+
+Enter on Graylog docker 
+
+```bash
+docker exec -it -u 0 graylog /bin/bash
+```
+Copy I&R/update.sh to the container and run it.
+
+Create the Alarm Rule with this parameters.
+
+<p align="center">
+<img src="screenshots/alarm.png" width="800" >
+</p>

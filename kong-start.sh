@@ -50,6 +50,6 @@ echo "Prometheus running http://0.0.0.0:9090/"
 
 echo "Starting API & DB..."
 
-docker-compose up -d db api ubuntu
+docker-compose up -d db api 
 
 echo "API on http://0.0.0.0:5000/"

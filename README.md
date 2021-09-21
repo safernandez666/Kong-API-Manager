@@ -174,10 +174,12 @@ Enter on Graylog docker
 ```bash
 docker exec -it -u 0 graylog /bin/bash
 ```
-Copy I&R/update.sh to the container and run it.
+Copy I&R/update.sh to the container and run it. The u 0 its to log in like root.
 
 Create the Alarm Rule with this parameters.
 
 <p align="center">
 <img src="screenshots/alarm.png" width="800" >
 </p>
+
+It is important that the script timeout is longer than the **disable.py** lock time.

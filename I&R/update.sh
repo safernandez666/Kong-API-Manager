@@ -5,7 +5,7 @@ apt install python3-pip -y
 pip3 install requests
 mkdir scripts
 cd scripts 
-chmod 750 $PWD
+chown -R graylog $PWD
 # Creo el Disable.py
 cat <<EOT >> disable.py
 #!/usr/bin/env python3

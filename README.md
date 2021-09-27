@@ -5,9 +5,11 @@ Run Kong Server + Konga + Prometheus + Grafana + API & DDBB + Graylog
 Clone the proyect and run docker-compose up
 
 ```bash
-https://github.com/safernandez666/Kong-API-Manager.git && cd Kong-API-Manager
+sudo git clone https://github.com/safernandez666/Kong-API-Manager.git && cd Kong-API-Manager
 
-chmod +x kong-start.sh
+sudo chown -R $USER $PWD
+
+sudo chmod +x kong-start.sh
 
 sh kong-start.sh
 ```

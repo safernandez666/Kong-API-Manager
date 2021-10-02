@@ -91,8 +91,8 @@ if __name__ == "__main__":
     sys.stdout.write("ID del Bloqueo: " + str(id_block['id']) + "/n")
     sys.stdout.close()
     sys.stdout = temp
-    # Time Rule Life 90 Seconds
-    t = 90 # Seconds
+    # Time Rule Life 60 Seconds
+    t = 60 # Seconds
     countdown(int(t)) 
 
     # Delete the Rule

@@ -6,9 +6,9 @@ url = 'http://localhost:8000/frase/'
 
 if __name__ == '__main__':
     try:
-        headers = {'apikey' : 'paw5nFpZ0QWhf6FxXH16iNRI4QSLSH4R'} # You must change for the PoC.
+        headers = {'apikey' : 'l3HquZU4uvtY6knMk0WzoWpM6mqX5uB8'} # You must change for the PoC.
         # Range to Iterate
-        x = range(28, 200)
+        x = range(18, 200)
         for i in x:
             print("Request Numero %d " % i)
             r = requests.get(url + str(i),headers=headers)

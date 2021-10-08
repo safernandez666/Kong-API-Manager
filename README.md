@@ -187,3 +187,5 @@ Create the Alarm Rule with this parameters.
 It is important that the script timeout is longer than the **disable.py** lock time.
 
 🎯 Don't forget to create an Enterprise License for Graylog. If don't create it, the scripting don't run. 
+
+***If you like the repo, please leame a Star!***:star2:

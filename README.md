@@ -188,4 +188,4 @@ It is important that the script timeout is longer than the **disable.py** lock t
 
 🎯 Don't forget to create an Enterprise License for Graylog. If don't create it, the scripting don't run. 
 
-***If you like the repo, please leame a Star!***:star2:
+:star2: ***If you like the repo, please leame a Star!***:star2:

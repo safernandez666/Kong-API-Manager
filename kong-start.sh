@@ -12,14 +12,14 @@ echo "Starting kong-database..."
 
 docker-compose up -d kong-database
 
-STATUS="starting"
+$STATUS="starting"
 
-while [ "$STATUS" != "healthy" ]
-do
+while ($STATUS -eq "healthy" )
+{
     STATUS=$(docker inspect --format {{.State.Health.Status}} kong-database)
     echo "kong-database state = $STATUS"
     sleep 5
-done
+}
 
 echo "Run database migrations..."
 

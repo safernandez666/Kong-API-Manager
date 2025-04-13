@@ -1,55 +1,52 @@
 #!/bin/bash
+set -e
 
-echo "Starting Graylog..."
+# Colors
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 
+log() {
+    echo -e "${GREEN}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
+}
+
+wait_for_healthy() {
+    local container_name=$1
+    local status="starting"
+    while [ "$status" != "healthy" ]; do
+        status=$(docker inspect --format '{{.State.Health.Status}}' "$container_name" 2>/dev/null || echo "not found")
+        log "$container_name state = $status"
+        sleep 5
+    done
+}
+
+log "Starting Graylog stack..."
 docker-compose up -d graylog elasticsearch mongo
+log "Graylog running at: http://127.0.0.1:9000/"
 
-echo "Graylog running http://127.0.0.1:9000/"
-
-echo "Starting kong-database..."
-
-#docker volume rm $(docker volume ls -q)
-
+log "Starting Kong database..."
 docker-compose up -d kong-database
+wait_for_healthy kong-database
 
-STATUS="starting"
-
-while [ "$STATUS" != "healthy" ]
-do
-    STATUS=$(docker inspect --format {{.State.Health.Status}} kong-database)
-    echo "kong-database state = $STATUS"
-    sleep 5
-done
-
-echo "Run database migrations..."
-
+log "Running Kong database migrations..."
 docker-compose up migrations
 
-echo "Starting kong..."
-
+log "Starting Kong..."
 docker-compose up -d kong
+log "Kong Admin: http://0.0.0.0:8001/"
+log "Kong Proxy: http://0.0.0.0:8000/"
 
-echo "Kong admin running http://0.0.0.0:8001/"
-echo "Kong proxy running http://0.0.0.0:8000/"
-
-echo "Starting konga..."
-
+log "Starting Konga..."
 docker-compose up -d konga
+log "Konga: http://0.0.0.0:1337/"
 
-echo "Konga running http://0.0.0.0:1337/"
-
+log "Starting Grafana..."
 docker-compose up -d grafana
+log "Grafana: http://0.0.0.0:3000/"
 
-echo "Grafana running http://0.0.0.0:3000/"
-
-echo "Starting prometheus..."
-
+log "Starting Prometheus stack..."
 docker-compose up -d prometheus node_exporter
+log "Prometheus: http://0.0.0.0:9090/"
 
-echo "Prometheus running http://0.0.0.0:9090/"
-
-echo "Starting API & DB..."
-
-docker-compose up -d db api 
-
-echo "API on http://0.0.0.0:5000/"
+log "Starting API and Database..."
+docker-compose up -d db api
+log "API: http://0.0.0.0:5000/"
